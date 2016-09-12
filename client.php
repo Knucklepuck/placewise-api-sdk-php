@@ -25,9 +25,9 @@
     *  @api
     *  @return array
     */
-    function get($path) {
+    function get($path, $params = []) {
       if (!$this->auth_id) $this->login();
-      $response = $this->get_from_api("$this->base_url/$path");
+      $response = $this->get_from_api("$this->base_url/$path", $params);
 
       return $response;
     }
@@ -53,6 +53,22 @@
       $auth_token = md5($timestamp . ':' . $this->authentication_token);
 
       $url = "$url?auth_id=$this->auth_id&auth_token=$auth_token&auth_timestamp=$timestamp";
+
+      if ($params['page']) {
+        $params['page']['number'] = $params['page']['number'] || 1;
+        $params['page']['size']   = $params['page']['size']   || 25;
+        $url = $url . '&page[number]=' . $params['page']['number'] . '&page[size]=' . $params['page']['size'];
+      }
+
+      if ($params['include']) {
+        $url = $url . '&include=' . $params['include'];
+      }
+
+      if ($params['fields']) {
+        foreach ($params['fields'] as $key => $value) {
+          $url = "$url&fields[$key]=$value";
+        }
+      }
 
     	$ch = curl_init();
 
