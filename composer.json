@@ -1,0 +1,13 @@
+{
+  "name": "knucklepuck/placewise-api-sdk-php",
+  "description": "Placewise php SDK library",
+  "type": "library",
+  "authors": [
+      {
+          "name": "Joey Blake",
+          "email": "jblake@knucklepuckmedia.com"
+      }
+  ],
+  "minimum-stability": "dev",
+  "require": {}
+}
