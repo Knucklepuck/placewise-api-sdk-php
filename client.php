@@ -55,8 +55,8 @@
       $url = "$url?auth_id=$this->auth_id&auth_token=$auth_token&auth_timestamp=$timestamp";
 
       if ($params['page']) {
-        $params['page']['number'] = $params['page']['number'] || 1;
-        $params['page']['size']   = $params['page']['size']   || 25;
+        $params['page']['number'] = $params['page']['number'] ?: 1;
+        $params['page']['size']   = $params['page']['size'] ?: 25;
         $url = $url . '&page[number]=' . $params['page']['number'] . '&page[size]=' . $params['page']['size'];
       }
 
